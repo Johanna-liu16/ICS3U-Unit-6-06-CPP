@@ -1,16 +1,17 @@
 // Copyright Johanna Liu 2022
 //
 // Created by Johanna Liu
-// Created in Dec 2022
+// Created in Jan 2023
 // This program calculates the average
 
 #include <iostream>
-#include <list>
-#include <string>
 #include <map>
+#include <string>
 
-std::string hexadecimal_converter(std::string quote) {
+std::string convertStringToHex(std::string string) {
+    // Converts a string to hex values
 
+    // Dictionary for hex values of characters
     std::map<char, std::string> dictionary = {
         {' ', "0x20"},
         {'!', "0x21"},
@@ -110,39 +111,41 @@ std::string hexadecimal_converter(std::string quote) {
     };
     std::string formattedText = "[";
 
-    for (int counterCheck = 0; counterCheck < quote.length(); counterCheck++) {
-        char character = quote[counterCheck];
+    for (int counterCheck = 0; counterCheck < string.length(); counterCheck++) {
+        char character = string[counterCheck];
 
         if (
-            dictionary.count(character) > 0 && counterCheck != quote.length() - 1) {
+            dictionary.count(character) > 0 && counterCheck
+            != string.length() - 1) {
             formattedText += "'" + dictionary[character] + "', ";
         } else if (
-            dictionary.count(character) > 0 && counterCheck == quote.length() - 1) {
+            dictionary.count(character) > 0 && counterCheck
+            == string.length() - 1) {
             formattedText += "'" + dictionary[character] + "']";
-        } else if (counterCheck != quote.length() - 1) {
-            formattedText += "'Invalid', ";
+        } else if (counterCheck != string.length() - 1) {
+            formattedText += "'INVALID', ";
         } else {
-            formattedText += "'Invalid']";
+            formattedText += "'INVALID']";
         }
     }
 
     return formattedText;
 }
 
+int main() {
+    // Gets the string and prints the full hex value
 
-    int main() {
-        // This function makes the list
+    std::string stringText;
+    std::string resultText;
 
-        std::list<std::string> words;
-        std::string quote;
-        std::string converted;
+    std::cout << "This program converts a string to hexadecimal." << std::endl;
+    std::cout << "Enter a string: ";
+    std::getline(std::cin, stringText);
+    std::cout << std::endl;
+    resultText = convertStringToHex(stringText);
+    std::cout << "'" << stringText << "' in hexadecimal is " <<
+    resultText << "." << std::endl;
 
-        std::cout << "This program converts string to hexadecimal." << std::endl;
-        std::cout << "Enter a string: ";
-        std::cin << quote;
-
-        // process
-        converted = hexadecimal_converter(quote);
-
-        std::cout << "\nDone." << std::endl;
-    }
+    std::cout << std::endl;
+    std::cout << "Done." << std::endl;
+}
